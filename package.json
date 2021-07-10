@@ -1,34 +1,43 @@
 {
-  "name": "cubeview",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "index.js",
-  "dependencies": {
-    "react": "^16.14.0",
-    "react-container-3d": "0.1.8",
-    "react-cubeview": "^2.5.5",
-    "react-dom": "^16.14.0",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2",
-    "three": "0.88.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "cubeview",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "main": "index.js",
+    "dependencies": {
+        "qwebchannel": "^5.9.0",
+        "react": "^16.14.0",
+        "react-container-3d": "0.1.8",
+        "react-cubeview": "^2.5.5",
+        "react-dom": "^16.14.0",
+        "react-scripts": "^1.1.5",
+        "three": "0.88.0",
+        "web-vitals": "^1.1.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "build-webpack": "webpack",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "html-webpack-plugin": "^4.5.0",
+        "path": "^0.12.7",
+        "webpack": "^5.44.0",
+        "webpack-cli": "^4.7.2",
+        "webpack-dev-server": "^1.16.5"
+    }
 }

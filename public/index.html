@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
+    <script type="text/javascript" src="./qwebchannel.js"></script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="stylesheet" href="index.css">
     <!--
@@ -26,10 +25,70 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+</head>
+
+<body>
+    <script type="text/javascript">
+        //BEGIN SETUP
+        window.addEventListener("mousemove", e => {
+            console.log(e);
+            let a = {}
+            a.x = e.screenX
+            a.y = e.screenY
+            //console.log(a)
+            //core.receiveObjects(a);
+        });
+        function simulate_drag_event(startx, starty, endx, endy, totalstep = 40) {
+            // Line (*) is equivalent to:
+            var event = new MouseEvent(
+                'mousedown',
+                { bubbles: true, cancelable: true, view: window, "clientX": startx, "clientY": starty });
+            document.getElementsByTagName('canvas')[0].dispatchEvent(event)
+
+            let deltax = endx - startx
+            let deltay = endy - starty
+            let stepx = deltax / totalstep
+            let stepy = deltay / totalstep
+
+            let i = 0, j = 0;
+            let t = setInterval(() => {
+                event = new MouseEvent(
+                    'mousemove',
+                    { bubbles: true, cancelable: true, view: window, "clientX": startx + i, "clientY": starty + j });
+                document.getElementsByTagName('canvas')[0].dispatchEvent(event)
+                i += stepx
+                j += stepy
+                if (Math.abs(i) >= Math.abs(deltax) && Math.abs(j) >= Math.abs(deltay)) {
+                    event = new MouseEvent(
+                        'mouseup',
+                        { bubbles: true, cancelable: true, view: window, "clientX": endx, "clientY": endy });
+                    document.getElementsByTagName('canvas')[0].dispatchEvent(event)
+                    clearInterval(t)
+                }
+            }, 10);
+        }
+        function simulate_click_event(x, y, totalstep = 40) {
+            // Line (*) is equivalent to:
+            var event = new MouseEvent(
+                'mousedown',
+                { bubbles: true, cancelable: true, view: window, "clientX": x, "clientY": y });
+            document.getElementsByTagName('canvas')[0].dispatchEvent(event)
+
+            event = new MouseEvent(
+                'mouseup',
+                { bubbles: true, cancelable: true, view: window, "clientX": x, "clientY": y });
+            document.getElementsByTagName('canvas')[0].dispatchEvent(event)
+        }
+        window.onload = function () {
+            if (location.search != "")
+                var baseUrl = (/[?&]webChannelBaseUrl=([A-Za-z0-9\-:/\.]+)/.exec(location.search)[1]);
+            else
+                var baseUrl = "ws://localhost:12345";
+        }
+            //END SETUP
+    </script>
     <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -40,5 +99,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
